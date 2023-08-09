@@ -39,9 +39,10 @@ public interface IShopService {
      * @param itemId   项目id即预约项目code
      * @param province 省份，例如：河北省，北京市
      * @param city     市：例如石家庄市
+     * @param ishopId
      * @return
      */
-    String getShopId(int shopType, String itemId, String province, String city, String lat, String lng);
+    String getShopId(int shopType, String itemId, String province, String city, String lat, String lng, String ishopId);
 
 
 }

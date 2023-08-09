@@ -180,7 +180,7 @@ public class IShopServiceImpl implements IShopService {
     }
 
     @Override
-    public String getShopId(int shopType, String itemId, String province, String city, String lat, String lng) {
+    public String getShopId(int shopType, String itemId, String province, String city, String lat, String lng, String ishopId) {
         //查询所在省市的投放产品和数量
         List<IMTItemInfo> shopList = getShopsByProvince(province, itemId);
         //取id集合
@@ -204,10 +204,13 @@ public class IShopServiceImpl implements IShopService {
             // 预约本省距离最近的门店
             shopId = getMinDistanceShopId(list, province, lat, lng);
         }
-
-        if (StringUtils.isEmpty(shopId)){
-
+        if (shopType ==3) {
+            // 单门店预约
+            if (list.stream().anyMatch(s->s.equals(ishopId))){
+                shopId = ishopId;
+            }
         }
+
 
 
         return shopId;

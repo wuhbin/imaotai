@@ -217,12 +217,14 @@
       >
         <template slot-scope="scope">
           <span>{{
-            scope.row.shopType == 1 ? "预约出货量最大门店" : "预约附近门店"
+            
+            showType(scope.row.shopType)
+           
           }}</span>
         </template>
       </el-table-column>
       <el-table-column label="预约执行分钟" align="center" prop="minute" />
-
+<!--  scope.row.shopType == 1 ? "预约出货量最大门店" : "预约附近门店" -->
       <el-table-column
         label="到期时间"
         align="center"
@@ -590,6 +592,10 @@ export default {
           value: 2,
           label: "预约你的位置(经纬度)附近门店",
         },
+        {
+          value: 3,
+          label: "仅预约此店铺",
+        },
       ],
       // I茅台预约商品列表格数据
       itemList: [],
@@ -620,6 +626,16 @@ export default {
           return v.toString(16);
         }
       );
+    },
+    showType(type) {
+      switch (type) {
+        case 1:
+          return "预约本市出货量最大的门店";
+        case 2:
+          return "预约你的位置(经纬度)附近门店";
+        case 3:
+          return "仅此店铺预约";
+      }
     },
     /** 查询I茅台用户列表 */
     getList() {
